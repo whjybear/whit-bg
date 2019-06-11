@@ -66,4 +66,6 @@ public class CustomerServiceImpl implements CustomerService {
 	public void deleteCustomerById(Integer id){
 		customerDao.deleteCustomerById(id);
 	}
+
+	
 }

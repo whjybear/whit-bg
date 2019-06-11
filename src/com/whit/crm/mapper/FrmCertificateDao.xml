@@ -31,6 +31,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- app查询证书 -->
+	<select id="selectQueryVo" parameterType="QueryVo" resultType="FrmCertificate">
+		select * from frmCertificate
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+			<if test="number != null and number != ''">
+				or number like "%"#{number}"%"
+			</if>
+		</where>
+	</select>
+	
+	<!-- app查询证书次数+1 -->
+	<update id="addQueryTimes" parameterType="FrmCertificate">
+		update frmCertificate 
+		<set>
+			<if test="queryTimes != null">
+				queryTimes =( queryTimes + 1 )
+			</if>
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+	
 	
 	<!-- //结果集 -->
 	<select id="selectFrmCertificateListByQueryVo" parameterType="QueryVo" resultType="FrmCertificate">
@@ -69,6 +95,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="queryTimes != null">
 				queryTimes = #{queryTimes},
 			</if>
+			<if test="title != null">
+				title = #{title},
+			</if>
 			<if test="isquery != null">
 				isquery = #{isquery}
 			</if>
@@ -82,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from frmCertificate where id = #{value}
 	</delete>
 	<insert id="insertFrmCertificateById" parameterType="FrmCertificate">
-		insert into frmCertificate(name,number,phone) values(#{name},#{number},#{phone})
+		insert into frmCertificate(name,number,phone,title) values(#{name},#{number},#{phone},#{title})
 	</insert>
 	
 </mapper>

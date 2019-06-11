@@ -78,9 +78,9 @@
             <!-- Logo -->
             <a href="index.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>系统后台</b></span>
+                <span class="logo-mini"><b>FRM</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>管理-后台</b></span>
+                <span class="logo-lg"><b>医健学府</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -92,7 +92,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
+                        <li class="dropdown messages-menu" style="display: none;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="label label-success">4</span>
@@ -170,7 +170,7 @@
                             </ul>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
+                        <li class="dropdown notifications-menu" style="display: none;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
                                 <span class="label label-warning">10</span>
@@ -211,7 +211,7 @@
                             </ul>
                         </li>
                         <!-- Tasks: style can be found in dropdown.less -->
-                        <li class="dropdown tasks-menu">
+                        <li class="dropdown tasks-menu" style="display: none;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag-o"></i>
                                 <span class="label label-danger">9</span>
@@ -313,7 +313,7 @@
                                         <a href="#" class="btn btn-default btn-flat">修改密码</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="../logout" class="btn btn-default btn-flat">注销</a>
+                                        <a href="#" class="btn btn-default btn-flat">注销</a>
                                     </div>
                                 </li>
                             </ul>
@@ -347,8 +347,9 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu"  >
                     <li class="header">菜单</li>
-                    <li id="admin-index"><a target="iframe" href="<%=basePath%>frmCertificate/home"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
-
+                    <%-- <li id="admin-index"><a target="iframe" href="<%=basePath%>frmCertificate/home"><i class="fa fa-dashboard"></i> <span>首页</span></a></li> --%>
+					<li id="admin-index"><a target="iframe" href="<%=basePath%>frmCertificate/frm"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+					
 				    <!-- 菜单 -->
 				    <li class="treeview active">
 				        <a href="#">
@@ -364,20 +365,20 @@
 				                    <i class="fa fa-circle-o"></i>证书管理
 				                </a>
 				            </li>
-				            <li id="admin-login">
+				            <li style="display: none;" id="admin-login">
 				                <%-- <a href="<%=basePath%>frmCertificate/seller_1" target="iframe"> --%>
 				                <a href="<%=basePath%>frmCertificate/home" target="iframe">
 				                    <i class="fa fa-circle-o"></i>客户管理
 				                </a>
 				            </li>
-							<li id="admin-login">
+							<li style="display: none;" id="admin-login">
 				                <a href="<%=basePath%>frmCertificate/seller" target="iframe">
 				                    <i class="fa fa-circle-o"></i>商家管理
 				                </a>
 				            </li>
 				        </ul>                        
 				    </li>
-					<li class="treeview">
+					<li class="treeview" style="display: none;">
 				        <a href="#">
 				            <i class="fa fa-folder"></i> 
 				            <span>商品管理</span>
@@ -415,7 +416,7 @@
 				        </ul>                        
 				    </li>
 					
-					<li class="treeview">
+					<li class="treeview" style="display: none;">
 				        <a href="#">
 				            <i class="fa fa-folder"></i> 
 				            <span>广告管理</span>

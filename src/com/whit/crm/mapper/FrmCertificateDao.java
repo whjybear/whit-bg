@@ -25,4 +25,10 @@ public interface FrmCertificateDao {
 		
 		//新增
 		public void insertFrmCertificateById(FrmCertificate frmCertificate);
+		
+		//app查询证书
+		public List<FrmCertificate> selectQueryVo(QueryVo vo);
+		
+		//app查询证书次数+1
+		public void addQueryTimes(FrmCertificate findCer);
 }

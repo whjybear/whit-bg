@@ -72,16 +72,13 @@
 		<!-- /.row -->
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form class="form-inline"
-					action="${pageContext.request.contextPath }/frmCertificate/frm"
-					method="post">
-					<div class="form-group">
-						<label for="frmName">证书获得者姓名</label> <input type="text"
-							class="form-control" id="frmName" value="${name }"
+				<form class="form-inline" action="${pageContext.request.contextPath }/frmCertificate/frm" method="post">
+					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+						<label for="frmName">学员姓名</label> <input type="text" class="form-control" id="frmName" value="${name }"
 							name="name">
 					</div>
 					 
-					<div class="form-group" style="margin-left: 15px;">
+					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
 						<label for="isquery">证书状态</label>
 						<select class="form-control" id="isquery" name="isquery">
 							<option value="">--请选择--</option>
@@ -91,20 +88,20 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="form-group" style="margin-left: 15px;">
+					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
 						<label for="frmName">手机号码</label> <input type="text"
 							class="form-control" id="frmPhone" value="${phone }"
 							name="phone">
 					</div>
-					<div class="form-group" style="margin-left: 15px;">
+					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
 						<label for="frmName">证书编号</label> <input type="text"
 							class="form-control" id="frmNumber" value="${number }"
 							name="number">
 					</div>
-					<button type="submit" class="btn btn-primary" style="margin-left: 15px;width:80px">查  询</button>
-					
+					<button type="submit" class="btn btn-primary" style="margin-left: 15px;width:80px;margin-bottom: 10px">查  询</button>
+					<button data-toggle="modal" data-target="#editDialog" onclick="editData('new');return false;"  class="btn btn-primary" style="width:80px;margin-bottom: 10px">新  增</button>
 				</form>
-				<button data-toggle="modal" data-target="#editDialog" onclick="editData('new')"  class="btn btn-primary" style="float: right;margin-top:-33px">新  增</button>
+				<!-- <button data-toggle="modal" data-target="#editDialog" onclick="editData('new')"  class="btn btn-primary" style="float: right;margin-top:-33px">新  增</button> -->
 			</div>
 		</div>
 		<div class="row">
@@ -116,9 +113,11 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>证书获得者姓名</th>
-								<th>证书类型</th>
+								<th>学员姓名</th>
+								<!-- <th>证书类型</th> -->
 								<th>证书编号</th>
+								<th>课程名称</th>
+								<th>课程结束日期</th>
 								<th>手机号码</th>
 								<th>是否已查询</th>
 								<th>查询次数</th>
@@ -130,8 +129,10 @@
 								<tr>
 									<td>${row.id}</td>
 									<td>${row.name}</td>
-									<td>${row.type}</td>
+									<%-- <td>${row.type}</td> --%>
 									<td>${row.number}</td>
+									<td>${row.title}</td>
+									<td>${row.endTime}</td>
 									<td>${row.phone}</td>
 									<td>
 										<c:if test="${row.isquery == '10001'}"> 已查询</c:if>
@@ -174,12 +175,18 @@
 					<form class="form-horizontal" id="edit_data_form" >
 						<input type="hidden" id="edit_id" name="id"/>
 						<div class="form-group">
+							<label for="edit_title" class="col-sm-2 control-label">课程名称</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="edit_title" placeholder="课程名称" name="title">
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="edit_name" class="col-sm-2 control-label">姓名</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="edit_name" placeholder="姓名" name="name">
 							</div>
 						</div>
-						<div class="form-group igroreInput">
+						<div class="form-group " style="display: none;">
 							<label for="edit_name" class="col-sm-2 control-label">证书类型</label>
 							<div class="col-sm-10">
 								<input type="text" readonly="readonly" class="form-control" id="edit_type" placeholder="证书类型" name="type">
@@ -197,7 +204,7 @@
 								<input type="text" class="form-control" id="edit_phone" placeholder="手机号码" name="phone">
 							</div>
 						</div>
-						<div class="form-group igroreInput" >
+						<div class="form-group "  style="display: none;">
 							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">查询状态</label>
 							<div class="col-sm-10"> 
 								<select	class="form-control" id="edit_isquery"  name="isquery">
@@ -255,6 +262,9 @@
 				$("#edit_name").val("");
 				$("#edit_number").val("");
 				$("#edit_phone").val("");
+				
+				//新增： 证书标题 和日 期需要记住上一次
+				$("#edit_title").val("");
 				 
 			}else{
 				$("#myModalLabel").text("修改信息");
@@ -273,6 +283,9 @@
 						$("#edit_phone").val(data.phone)
 						$("#edit_isquery").val(data.isquery);
 						$("#edit_queryTimes").val(data.queryTimes);
+						
+						$("#edit_title").val(data.title);
+						
 					}
 				});
 			}
@@ -280,7 +293,19 @@
 		}
 		//更新数据 + 新建
 		function updateData() {
-			new FormData
+			//new FormData
+			if($("#edit_name").val() == ""){
+				alert("姓名不能为空");
+				return;
+			}
+			if($("#edit_title").val() == ""){
+				alert("课程名称不能为空");
+				return;
+			}
+			if($("#edit_number").val() == ""){
+				alert("证书编号不能为空");
+				return;
+			}
 			if($("#edit_id").val() == ""){
 				//新建，只上传指定的字段
 				$.ajax({
@@ -289,10 +314,12 @@
 					data:{
 						"name":$("#edit_name").val(),
 						"number":$("#edit_number").val(),
-						"phone":$("#edit_phone").val()
+						"phone":$("#edit_phone").val(),
+						"title":$("#edit_title").val()
 					},
 					success:function(data) {  
 						alert("添加成功！");
+						
 						window.location.reload();
 					}
 				})

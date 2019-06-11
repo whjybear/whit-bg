@@ -1,5 +1,7 @@
 package com.whit.crm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +24,6 @@ public class FrmCertificateServiceImpl implements FrmCertificateService{
 		FrmCertificate f  = frmCertificateDao.selectFrmCertificateById(id);
 		return f;
 	}
-
-	 
-
 	
 	// 通过四个条件 查询分页对象
 		@Override
@@ -48,7 +47,6 @@ public class FrmCertificateServiceImpl implements FrmCertificateService{
 				page.setRows(frmCertificateDao.selectFrmCertificateListByQueryVo(vo));
 			}
 			return page;
-
 		}
 
 		@Override
@@ -56,16 +54,25 @@ public class FrmCertificateServiceImpl implements FrmCertificateService{
 			frmCertificateDao.updateFrmCertificateById(frmCertificate);
 		}
 
-
 		@Override
 		public void deleteFrmCertificateById(Integer id) {
 			frmCertificateDao.deleteFrmCertificateById(id);
 		}
 
-
 		@Override
 		public void insertFrmCertificateById(FrmCertificate frmCertificate) {
 			frmCertificateDao.insertFrmCertificateById(frmCertificate);
+		}
+
+		//
+		@Override
+		public List<FrmCertificate> selectQueryVo(QueryVo vo) {
+			return frmCertificateDao.selectQueryVo(vo);
+		}
+
+		@Override
+		public void addQueryTimes(FrmCertificate findCer) {
+			frmCertificateDao.addQueryTimes(findCer);
 		}
 
 }

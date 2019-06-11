@@ -1,5 +1,7 @@
 package com.whit.crm.service;
 
+import java.util.List;
+
 import com.whit.common.utils.Page;
 import com.whit.crm.pojo.FrmCertificate;
 import com.whit.crm.pojo.QueryVo;
@@ -19,4 +21,10 @@ public interface FrmCertificateService {
 
 
 		public void insertFrmCertificateById(FrmCertificate frmCertificate);
+
+		//app查询证书
+		public List<FrmCertificate> selectQueryVo(QueryVo vo);
+
+		//app查询证书次数+1
+		public void addQueryTimes(FrmCertificate findCer);
 }

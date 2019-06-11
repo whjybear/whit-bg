@@ -10,8 +10,24 @@ import java.util.Date;
 public class FrmCertificate {
 	//id  	key
 	int id;
-	//标题
+	//标题		-- 课程
 	String title;
+	
+	//开课城市
+	String city;
+	
+	//开始时间
+	Date startTime;
+	//结束时间	证书上的结业时间（培训结束时间）
+	Date endTime;
+	
+	//证书二维码地址
+	String qrpath;
+	
+	//报名老师/机构 todo
+	
+	//学费  todo
+	
 	//类型
 	String type;
 	//证书编号
@@ -98,6 +114,26 @@ public class FrmCertificate {
 	}
 	public void setLastDate(Date lastDate) {
 		this.lastDate = lastDate;
+	}
+	
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 	public FrmCertificate() {
 	}

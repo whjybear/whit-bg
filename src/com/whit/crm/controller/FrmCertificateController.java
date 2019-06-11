@@ -112,6 +112,34 @@ public class FrmCertificateController {
 		return "home";
 	}
 	
+	//app证书查询
+	@RequestMapping(value = "/frmCertificate/queryCer")
+	@ResponseBody
+	public  FrmCertificate queryCer(QueryVo vo, Model model) {
+//		String name;	//姓名		查询条件1 或
+//		String number; 	//证书号码	查询条件2
+		//
+		List<FrmCertificate> selectQueryVo = frmCertificateService.selectQueryVo(vo);
+		if(selectQueryVo != null) {
+			System.out.println("selectQueryVo.size()=======" + selectQueryVo.size());
+			//如果size>=1,返回第一个证书（一个人有多个证书的情况），后期考虑在app端列表的方式呈现
+			if(selectQueryVo.size() >= 1) {
+				FrmCertificate findCer = selectQueryVo.get(0);
+				//增加该证书的查询次数，保存
+				frmCertificateService.addQueryTimes(findCer);
+				System.out.println("增加查询次数1");
+				//该证书的查询次数加1后返回app
+				findCer.setQueryTimes(findCer.getQueryTimes()+1);
+				
+				return findCer;
+			}
+		}else {
+			System.out.println("selectQueryVo=======null");
+			return null;
+		}
+		return null;
+	}
+	
 	@RequestMapping(value = "/frmCertificate/seller")
 	public String seller(QueryVo vo, Model model) {
 		return "seller";

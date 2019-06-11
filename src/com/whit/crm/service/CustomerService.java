@@ -18,4 +18,6 @@ public interface CustomerService {
 	//通过ID 删除客户
 	public void deleteCustomerById(Integer id);
 
+	
+
 }
