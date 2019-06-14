@@ -21,6 +21,9 @@ public class QueryVo {
 	String phone;	//手机号码
 	String number; 	//证书号码
 	
+	String title; 	//课程名称
+	String signTeacher ; //签名老师
+	
 	public Integer getStartRow() {
 		return startRow;
 	}
@@ -88,11 +91,18 @@ public class QueryVo {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getSignTeacher() {
+		return signTeacher;
+	}
+	public void setSignTeacher(String signTeacher) {
+		this.signTeacher = signTeacher;
+	}
 	
 	
-	
-	
-	
-
 }

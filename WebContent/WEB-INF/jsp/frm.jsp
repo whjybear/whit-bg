@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="whit" uri="http://whit.cn/common/"%>
 <%
 	String path = request.getContextPath();
@@ -17,9 +18,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>后台管理系统</title>
 <!-- Tell the browser to be responsive to screen width -->
-<meta
-	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
-	name="viewport">
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 
 <!-- Bootstrap Core CSS -->
 <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
@@ -30,6 +29,9 @@
 <!-- DataTables CSS -->
 <link href="<%=basePath%>css/dataTables.bootstrap.css" rel="stylesheet">
 
+
+<link href="<%=basePath%>css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
 <!-- Custom CSS -->
 <link href="<%=basePath%>css/sb-admin-2.css" rel="stylesheet">
 
@@ -38,6 +40,7 @@
 	type="text/css">
 <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet"
 	type="text/css">
+	
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,7 +68,7 @@
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">证书管理</h1>
+				<h1 class="page-header" style="font-size:17px">证书管理</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -78,7 +81,7 @@
 							name="name">
 					</div>
 					 
-					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+					<div class="form-group" style="display:none;margin-left: 15px;margin-bottom: 10px">
 						<label for="isquery">证书状态</label>
 						<select class="form-control" id="isquery" name="isquery">
 							<option value="">--请选择--</option>
@@ -94,9 +97,23 @@
 							name="phone">
 					</div>
 					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+						<label for="frmTitle">课程名称</label> <input type="text" class="form-control" id="frmTitle" value="${title }"
+							name="title">
+					</div>
+					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
 						<label for="frmName">证书编号</label> <input type="text"
 							class="form-control" id="frmNumber" value="${number }"
 							name="number">
+					</div>
+					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+						<label for="teachersList">签名老师</label>
+						<select class="form-control" id="teachersList" name="signTeacher">
+							<option value="">--请选择--</option>
+							<c:forEach items="${teachersList}" var="item">
+								<option value="${item.dict_id}"
+									<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name}-${item.dict_id }</option>
+							</c:forEach>
+						</select>
 					</div>
 					<button type="submit" class="btn btn-primary" style="margin-left: 15px;width:80px;margin-bottom: 10px">查  询</button>
 					<button data-toggle="modal" data-target="#editDialog" onclick="editData('new');return false;"  class="btn btn-primary" style="width:80px;margin-bottom: 10px">新  增</button>
@@ -107,19 +124,20 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">客户信息列表</div>
+					<div class="panel-heading" style="display: none">客户信息列表</div>
 					<!-- /.panel-heading -->
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<!-- <th>ID</th> -->
+								<th>签名教师</th>
 								<th>学员姓名</th>
 								<!-- <th>证书类型</th> -->
 								<th>证书编号</th>
 								<th>课程名称</th>
 								<th>课程结束日期</th>
 								<th>手机号码</th>
-								<th>是否已查询</th>
+								<!-- <th>是否已查询</th> -->
 								<th>查询次数</th>
 								<th>操作</th>
 							</tr>
@@ -127,17 +145,18 @@
 						<tbody>
 							<c:forEach items="${page.rows}" var="row">
 								<tr>
-									<td>${row.id}</td>
+									<%-- <td>${row.id}</td> --%>
+									<td>${row.signTeacher}</td>
 									<td>${row.name}</td>
 									<%-- <td>${row.type}</td> --%>
 									<td>${row.number}</td>
 									<td>${row.title}</td>
-									<td>${row.endTime}</td>
+									<td><fmt:formatDate value="${row.endTime}" pattern="yyyy-MM-dd"/></td>
 									<td>${row.phone}</td>
-									<td>
+									<%-- <td>
 										<c:if test="${row.isquery == '10001'}"> 已查询</c:if>
 										<c:if test="${row.isquery == '10002'}"> 未查询</c:if>
-									</td>
+									</td> --%>
 									<td>${row.queryTimes}</td>
 									<td style="text-align: center;"><a href="#" class="btn btn-primary btn-xs"
 										data-toggle="modal" data-target="#editDialog"
@@ -180,6 +199,28 @@
 								<input type="text" class="form-control" id="edit_title" placeholder="课程名称" name="title">
 							</div>
 						</div>
+						<div class="form-group "  style="display: block;">
+							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">签名老师</label>
+							<div class="col-sm-10"> 
+								<select	class="form-control" id="edit_signTeacher"  name="signTeacher">
+									<option value="">--请选择--</option>
+									<c:forEach items="${teachersList}" var="item">
+										<option value="${item.dict_id}"<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="form-group "  style="display: none;">
+							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">查询状态</label>
+							<div class="col-sm-10"> 
+								<select	class="form-control" id="edit_isquery"  name="isquery">
+									<option value="">--请选择--</option>
+									<c:forEach items="${isQueryType}" var="item">
+										<option value="${item.dict_id}"<c:if test="${item.dict_id == isquery}"> selected</c:if>>${item.dict_item_name }</option>
+									</c:forEach>
+								</select>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="edit_name" class="col-sm-2 control-label">姓名</label>
 							<div class="col-sm-10">
@@ -199,22 +240,24 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="edit_endTime" class="col-sm-2 control-label">结业日期</label>
+							<div class='input-group date col-sm-10' id='datetimepicker1' style="width: 450px;padding-left:14px">
+				                <input name="endTime" id="edit_endTime" type='text' class="form-control" />
+				                <span style="" class="input-group-addon">
+				                    <span class="glyphicon glyphicon-calendar"></span>
+				                </span>
+				            </div>
+							<!-- <div class="col-sm-10">
+								<input type="text" class="form-control"  id="edit_endTime" placeholder="结业日期" name="endTime">
+							</div> -->
+						</div>
+						<div class="form-group">
 							<label for="edit_phone" class="col-sm-2 control-label">手机号码</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="edit_phone" placeholder="手机号码" name="phone">
 							</div>
 						</div>
-						<div class="form-group "  style="display: none;">
-							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">查询状态</label>
-							<div class="col-sm-10"> 
-								<select	class="form-control" id="edit_isquery"  name="isquery">
-									<option value="">--请选择--</option>
-									<c:forEach items="${isQueryType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == isquery}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
+						
 						<div class="form-group igroreInput">
 							<label for="edit_queryTimes" class="col-sm-2 control-label">查询次数</label>
 							<div class="col-sm-10">
@@ -245,13 +288,40 @@
 	<script src="<%=basePath%>js/jquery.dataTables.min.js"></script>
 	<script src="<%=basePath%>js/dataTables.bootstrap.min.js"></script>
 
+	<script src="<%=basePath%>js/moment-with-locales.js"></script>
+	<script src="<%=basePath%>js/bootstrap-datetimepicker.min.js"></script>
+ 	
+	<%-- <script src="<%=basePath%>js/moment.min.js"></script> --%>
+	
 	<!-- Custom Theme JavaScript -->
 	<script src="<%=basePath%>js/sb-admin-2.js"></script>
 	
 	<script type="text/javascript">
+		var formatDateTime = function(data, format) {
+			if (data==undefined || data=="") {
+				return "";
+			} else {
+				var m = moment(data);
+				return m.isValid() ? m.format(format) : "";
+			}
+		};
+		
+		$(function () {
+		    $('#datetimepicker1').datetimepicker({
+		        format: 'YYYY-MM-DD',
+		        locale: moment.locale('zh-cn')
+		    });
+		   
+		    //$('#edit_endTime').val('2018-12-09');
+		});
+	
+		
 		//打开编辑窗口
 		function editData(id) {
+			
 			if(id == 'new'){
+				//新增证书编号可输入
+				$("#edit_number").prop("readonly",false);
 				//新增
 				//新增窗口的标题
 				//新增的时候只需要填写必要字段
@@ -263,8 +333,15 @@
 				$("#edit_number").val("");
 				$("#edit_phone").val("");
 				
-				//新增： 证书标题 和日 期需要记住上一次
+				$("#edit_endTime").val("");
+				//新增： 证书标题 和日 期需要记住上一次 todo
 				$("#edit_title").val("");
+				//var date = new Date();
+				//Y = date.getFullYear() + '-';
+				//M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+				//D = date.getDate() + ' ';
+				//默认是当前日 日 期需要记住上一次 todo
+				//$("#edit_endTime").val(Y+M+D);
 				 
 			}else{
 				$("#myModalLabel").text("修改信息");
@@ -285,7 +362,11 @@
 						$("#edit_queryTimes").val(data.queryTimes);
 						
 						$("#edit_title").val(data.title);
-						
+						$("#edit_signTeacher").val(data.signTeacher);
+ 
+						$("#edit_endTime").val(formatDateTime(data.endTime,'YYYY-MM-DD'));
+						//证书编号不可修改
+						$("#edit_number").prop("readonly",true);
 					}
 				});
 			}
@@ -294,19 +375,49 @@
 		//更新数据 + 新建
 		function updateData() {
 			//new FormData
-			if($("#edit_name").val() == ""){
-				alert("姓名不能为空");
-				return;
-			}
 			if($("#edit_title").val() == ""){
 				alert("课程名称不能为空");
 				return;
 			}
+			if($("#edit_signTeacher").val() == ""){
+				alert("签名老师不能为空");
+				return;
+			}
+			if($("#edit_name").val() == ""){
+				alert("姓名不能为空");
+				return;
+			}
+			
 			if($("#edit_number").val() == ""){
 				alert("证书编号不能为空");
 				return;
 			}
+			if($("#edit_endTime").val() == ""){
+				alert("结业日期不能为空");
+				return;
+			}
+			
 			if($("#edit_id").val() == ""){
+				//检查$("#edit_number").val() 证书编号不能重复
+				var isDup = "";
+				$.ajax({
+						type:"get",
+						async:false,  //同步请求
+						url:"<%=basePath%>frmCertificate/checkNumber.action",
+						data:{
+							"number":$("#edit_number").val(),
+						},
+						success:function(data) {
+							if(data == "nook"){
+								alert("证书编号重复！请检查");
+								isDup = data;
+								return;
+							}
+						}
+				})
+				if(isDup == "nook"){
+					return;
+				}
 				//新建，只上传指定的字段
 				$.ajax({
 					type:"get",
@@ -315,7 +426,9 @@
 						"name":$("#edit_name").val(),
 						"number":$("#edit_number").val(),
 						"phone":$("#edit_phone").val(),
-						"title":$("#edit_title").val()
+						"title":$("#edit_title").val(),
+						"endTime":$("#edit_endTime").val(),
+						"signTeacher":$("#edit_signTeacher").val()
 					},
 					success:function(data) {  
 						alert("添加成功！");

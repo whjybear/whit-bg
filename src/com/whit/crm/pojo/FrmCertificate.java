@@ -7,6 +7,8 @@ package com.whit.crm.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class FrmCertificate {
 	//id  	key
 	int id;
@@ -16,9 +18,13 @@ public class FrmCertificate {
 	//开课城市
 	String city;
 	
+	//证书签名老师
+	String signTeacher;
+	
 	//开始时间
 	Date startTime;
 	//结束时间	证书上的结业时间（培训结束时间）
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date endTime;
 	
 	//证书二维码地址
@@ -136,6 +142,20 @@ public class FrmCertificate {
 		this.endTime = endTime;
 	}
 	public FrmCertificate() {
+	}
+	
+	
+	public String getSignTeacher() {
+		return signTeacher;
+	}
+	public void setSignTeacher(String signTeacher) {
+		this.signTeacher = signTeacher;
+	}
+	public String getQrpath() {
+		return qrpath;
+	}
+	public void setQrpath(String qrpath) {
+		this.qrpath = qrpath;
 	}
 	@Override
 	public String toString() {

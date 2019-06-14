@@ -31,4 +31,7 @@ public interface FrmCertificateDao {
 		
 		//app查询证书次数+1
 		public void addQueryTimes(FrmCertificate findCer);
+		
+		//根据number查询证书
+		public List<FrmCertificate> selectFrmCertificateByNumber(String number);
 }

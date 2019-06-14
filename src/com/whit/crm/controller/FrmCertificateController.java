@@ -1,6 +1,12 @@
 package com.whit.crm.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,11 +63,25 @@ public class FrmCertificateController {
 	// 入口
 	@RequestMapping(value = "/frmCertificate/list")
 	public String list(QueryVo vo, Model model) {
-		System.out.println("c");
-		  
-
 //		return "frmCertificate";
+		
+		return "login";
+	}
+	
+	@RequestMapping(value = "/frmCertificate/listC")
+	public String listC(QueryVo vo, Model model) {
 		return "frmCertificate";
+	}
+	
+	//登录验证
+	@RequestMapping(value = "/frmCertificate/checkLogin")
+	public void checkLogin(String username,String password,HttpServletRequest req,HttpServletResponse resp) throws IOException {
+		if("admin".equals(username) && "admin!@#$%admin".equals(password)) {
+			req.getSession().setAttribute("loginUser", "loginUser");
+			resp.sendRedirect("listC");
+		}else {
+			resp.sendRedirect("/whit-bg/");
+		}
 	}
 	
 	@RequestMapping(value = "frmCertificate/seller_1")
@@ -76,14 +96,19 @@ public class FrmCertificateController {
 		List<BaseDict> isQueryType = baseDictService.selectBaseDictListByCode("010");
 		model.addAttribute("isQueryType", isQueryType);
 		
+		//授课老师选择（老师签名）
+		List<BaseDict> teachersList = baseDictService.selectBaseDictListByCode("011");
+		model.addAttribute("teachersList", teachersList);
 		
 		//通过四个条件  查询分页对象
 		Page<FrmCertificate> page = frmCertificateService.selectPageByQueryVo(vo);
 		model.addAttribute("page", page);
 		model.addAttribute("name", vo.getName());
 		model.addAttribute("phone", vo.getPhone());
-	 
+		
+		model.addAttribute("title", vo.getTitle());
 		model.addAttribute("number", vo.getNumber());
+		model.addAttribute("signTeacher", vo.getSignTeacher());
 		
 		System.out.println("page-size:" + page.getRows().size());
 		return "frm";
@@ -119,6 +144,17 @@ public class FrmCertificateController {
 //		String name;	//姓名		查询条件1 或
 //		String number; 	//证书号码	查询条件2
 		//
+		if(vo.getName() == null && vo.getNumber() == null) {
+			//没有任何查询条件返回空
+			return null;
+		}
+		if(vo.getName() == "" && vo.getNumber() == null) {
+			return null;
+		}
+		if(vo.getName() == null && vo.getNumber() == "") {
+			return null;
+		}
+		
 		List<FrmCertificate> selectQueryVo = frmCertificateService.selectQueryVo(vo);
 		if(selectQueryVo != null) {
 			System.out.println("selectQueryVo.size()=======" + selectQueryVo.size());
@@ -199,6 +235,19 @@ public class FrmCertificateController {
 	}
 	
 	//去修改页面
+	@RequestMapping(value = "/frmCertificate/checkNumber.action")
+	public @ResponseBody
+	String checkNumber(String number){
+		System.out.println("number......" + number);
+//		System.out.println(frmCertificateService.selectFrmCertificateByNumber(number));
+		if(frmCertificateService.selectFrmCertificateByNumber(number)!=null && frmCertificateService.selectFrmCertificateByNumber(number).size()>0) {
+			return "nook";
+		}else {
+			return "ok";
+		}
+		
+	}
+	//去修改页面
 	@RequestMapping(value = "/frmCertificate/edit.action")
 	public @ResponseBody
 	FrmCertificate edit(Integer id){
@@ -212,6 +261,7 @@ public class FrmCertificateController {
 	public @ResponseBody
 	String update(FrmCertificate frmCertificate){
 		System.out.println("---------------------frmCertificate.getId()" + frmCertificate.getId());
+		System.out.println("frmCertificate.getEndTime().toLocaleString()"+ frmCertificate.getEndTime().toLocaleString());
 		if(frmCertificate.getId() == 0) {
 			//新建
 			frmCertificateService.insertFrmCertificateById(frmCertificate);

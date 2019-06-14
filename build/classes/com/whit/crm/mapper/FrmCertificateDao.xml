@@ -12,6 +12,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- //通过number查询证书 -->
+	<select id="selectFrmCertificateByNumber" parameterType="String" resultType="FrmCertificate">
+		select * from frmCertificate
+		<where>
+			number = #{number}
+		</where>
+	</select>
+	
+	
 	<!-- //总条数 -->
 	<select id="frmCertificateCountByQueryVo" parameterType="QueryVo" resultType="Integer">
 		select count(1) from frmCertificate
@@ -25,8 +34,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="phone != null and phone != ''">
 				and phone like "%"#{phone}"%"
 			</if>
+			<if test="title != null and title != ''">
+				and title like "%"#{title}"%"
+			</if>
 			<if test="number != null and number != ''">
 				and number like "%"#{number}"%"
+			</if>
+			<if test="signTeacher != null and signTeacher != ''">
+				and signTeacher = #{signTeacher}
 			</if>
 		</where>
 	</select>
@@ -36,10 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from frmCertificate
 		<where>
 			<if test="name != null and name != ''">
-				name like "%"#{name}"%"
+				name = #{name}
 			</if>
 			<if test="number != null and number != ''">
-				or number like "%"#{number}"%"
+				or number = #{number}
 			</if>
 		</where>
 	</select>
@@ -71,8 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="phone != null and phone != ''">
 				and phone like "%"#{phone}"%"
 			</if>
+			<if test="title != null and title != ''">
+				and title like "%"#{title}"%"
+			</if>
 			<if test="number != null and number != ''">
 				and number like "%"#{number}"%"
+			</if>
+			<if test="signTeacher != null and signTeacher != ''">
+				and signTeacher = #{signTeacher}
 			</if>
 		</where>
 		order by id
@@ -98,6 +119,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="title != null">
 				title = #{title},
 			</if>
+			<if test="endTime != null">
+				endTime = #{endTime},
+			</if>
+			<if test="signTeacher != null">
+				signTeacher = #{signTeacher},
+			</if>
 			<if test="isquery != null">
 				isquery = #{isquery}
 			</if>
@@ -111,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from frmCertificate where id = #{value}
 	</delete>
 	<insert id="insertFrmCertificateById" parameterType="FrmCertificate">
-		insert into frmCertificate(name,number,phone,title) values(#{name},#{number},#{phone},#{title})
+		insert into frmCertificate(signTeacher,name,number,phone,title,endTime) values(#{signTeacher},#{name},#{number},#{phone},#{title},#{endTime})
 	</insert>
 	
 </mapper>

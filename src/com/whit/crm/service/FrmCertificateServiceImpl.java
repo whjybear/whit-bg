@@ -74,5 +74,11 @@ public class FrmCertificateServiceImpl implements FrmCertificateService{
 		public void addQueryTimes(FrmCertificate findCer) {
 			frmCertificateDao.addQueryTimes(findCer);
 		}
+		
+		//根据number查询证书
+		@Override
+		public List<FrmCertificate> selectFrmCertificateByNumber(String number) {
+			return frmCertificateDao.selectFrmCertificateByNumber(number);
+		}
 
 }

@@ -70,7 +70,11 @@
 </head>
 
 <body class="hold-transition skin-green sidebar-mini" ng-app="pinyougou" ng-controller="indexController" ng-init="showLoginName()">
-
+	<%
+			if(session.getAttribute("loginUser") == null){
+				response.sendRedirect("/whit-bg");
+			}
+	%>
     <div class="wrapper">
 
         <!-- 页面头部 -->
@@ -313,7 +317,7 @@
                                         <a href="#" class="btn btn-default btn-flat">修改密码</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">注销</a>
+                                        <a href="/whit-bg" class="btn btn-default btn-flat">退出</a>
                                     </div>
                                 </li>
                             </ul>
