@@ -76,7 +76,8 @@ public class FrmCertificateController {
 	//登录验证
 	@RequestMapping(value = "/frmCertificate/checkLogin")
 	public void checkLogin(String username,String password,HttpServletRequest req,HttpServletResponse resp) throws IOException {
-		if("admin".equals(username) && "admin!@#$%admin".equals(password)) {
+//		if("admin".equals(username) && "admin!@#$%admin".equals(password)) {
+		if("admin".equals(username) && "1".equals(password)) {
 			req.getSession().setAttribute("loginUser", "loginUser");
 			resp.sendRedirect("listC");
 		}else {
@@ -259,10 +260,14 @@ public class FrmCertificateController {
 	//修改保存 + 新建
 	@RequestMapping(value = "/frmCertificate/update.action")
 	public @ResponseBody
-	String update(FrmCertificate frmCertificate){
+	String update(FrmCertificate frmCertificate,HttpServletRequest req){
 		System.out.println("---------------------frmCertificate.getId()" + frmCertificate.getId());
 		System.out.println("frmCertificate.getEndTime().toLocaleString()"+ frmCertificate.getEndTime().toLocaleString());
 		if(frmCertificate.getId() == 0) {
+			//新建的时候，保存证书名称、签名老师、结束日期数据
+			req.getSession().setAttribute("tempTitle",frmCertificate.getTitle());
+			req.getSession().setAttribute("tempSignTeacher",frmCertificate.getSignTeacher());
+			req.getSession().setAttribute("tempEndTime",frmCertificate.getEndTime());
 			//新建
 			frmCertificateService.insertFrmCertificateById(frmCertificate);
 			return "OK";

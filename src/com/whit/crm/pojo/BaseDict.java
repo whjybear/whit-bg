@@ -15,6 +15,9 @@ public class BaseDict implements Serializable {
 	private Integer dict_sort;		//
 	private String dict_enable;		//
 	private String dict_memo;		//
+	
+	private String pic;
+	
 	public String getDict_id() {
 		return dict_id;
 	}
@@ -62,6 +65,14 @@ public class BaseDict implements Serializable {
 	}
 	public void setDict_memo(String dict_memo) {
 		this.dict_memo = dict_memo;
+	}
+	
+	
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 	@Override
 	public String toString() {

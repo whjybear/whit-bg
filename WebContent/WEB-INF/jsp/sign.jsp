@@ -40,7 +40,7 @@
 	type="text/css">
 <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet"
 	type="text/css">
-	
+ 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,6 +59,7 @@
 		}
 		td{
 			text-align: center;
+			vertical-align: middle!important;
 		}
     </style>
 
@@ -68,7 +69,7 @@
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header" style="font-size:17px">证书管理</h1>
+				<h1 class="page-header" style="font-size:17px">签名管理</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -76,7 +77,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<form class="form-inline" action="${pageContext.request.contextPath }/frmCertificate/frm" method="post">
-					<div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+					<%-- <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
 						<label for="frmName">学员姓名</label> <input type="text" class="form-control" id="frmName" value="${name }"
 							name="name">
 					</div>
@@ -114,9 +115,11 @@
 									<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name}-${item.dict_id }</option>
 							</c:forEach>
 						</select>
-					</div>
+					</div> --%>
 					<button type="submit" class="btn btn-primary" style="margin-left: 15px;width:80px;margin-bottom: 10px">查  询</button>
 					<button data-toggle="modal" data-target="#editDialog" onclick="editData('new');return false;"  class="btn btn-primary" style="width:80px;margin-bottom: 10px">新  增</button>
+					<button data-toggle="modal" data-target="#editDialog" onclick="refreshA();return false;"  class="btn btn-primary" style="width:80px;margin-bottom: 10px">刷 新</button>
+					
 				</form>
 				<!-- <button data-toggle="modal" data-target="#editDialog" onclick="editData('new')"  class="btn btn-primary" style="float: right;margin-top:-33px">新  增</button> -->
 			</div>
@@ -124,45 +127,30 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="display: none">客户信息列表</div>
+					<div class="panel-heading" style="display: none">签名列表</div>
 					<!-- /.panel-heading -->
 					<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<!-- <th>ID</th> -->
-								<th>签名教师</th>
-								<th>学员姓名</th>
-								<!-- <th>证书类型</th> -->
-								<th>证书编号</th>
-								<th>课程名称</th>
-								<th>课程结束日期</th>
-								<th>手机号码</th>
-								<!-- <th>是否已查询</th> -->
-								<th>查询次数</th>
+								<th>编号</th>
+								<th>签名教师姓名</th>
+								<th>图片</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${page.rows}" var="row">
+							<c:forEach items="${teachersList}" var="row">
 								<tr>
-									<%-- <td>${row.id}</td> --%>
-									<td>${row.signTeacher}</td>
-									<td>${row.name}</td>
-									<%-- <td>${row.type}</td> --%>
-									<td>${row.number}</td>
-									<td>${row.title}</td>
-									<td><fmt:formatDate value="${row.endTime}" pattern="yyyy-MM-dd"/></td>
-									<td>${row.phone}</td>
-									<%-- <td>
-										<c:if test="${row.isquery == '10001'}"> 已查询</c:if>
-										<c:if test="${row.isquery == '10002'}"> 未查询</c:if>
-									</td> --%>
-									<td>${row.queryTimes}</td>
+									<td>${row.dict_id}</td>
+									<td>${row.dict_item_name}</td>
+									<td>
+										<img style="width: 100px;" data-toggle="modal" onclick="showBigImg('${row.dict_id}','${row.dict_item_name}','/pic/${row.pic}')"  data-target="#showDialog"   alt="" src="/pic/${row.pic}">
+									</td>
 									<td style="text-align: center;"><a href="#" class="btn btn-primary btn-xs"
 										data-toggle="modal" data-target="#editDialog"
-										onclick="editData(${row.id})">修改</a> <a href="#"
+										onclick="editData(${row.dict_id})">修改</a> <a href="#"
 										class="btn btn-danger btn-xs"
-										onclick="deleteData(${row.id})">删除</a></td>
+										onclick="deleteData(${row.dict_id})">删除</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -179,6 +167,26 @@
 		</div>
 	</div>
 	<!-- /#page-wrapper -->
+	<div class="modal fade" id="showDialog" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 800px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel2">导师签名图片</h4>
+				</div>
+				<div class="modal-body">
+					 <img alt="" style="width: 100%" src="">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- 新建、编辑对话框 -->
 	<div class="modal fade" id="editDialog" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -205,7 +213,7 @@
 								<select	class="form-control" id="edit_signTeacher"  name="signTeacher">
 									<option value="">--请选择--</option>
 									<c:forEach items="${teachersList}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name }-${item.dict_id }</option>
+										<option value="${item.dict_id}"<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name }</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -296,7 +304,8 @@
 	
 	<!-- Custom Theme JavaScript -->
 	<script src="<%=basePath%>js/sb-admin-2.js"></script>
-	
+	 
+		
 	<script type="text/javascript">
 		var formatDateTime = function(data, format) {
 			if (data==undefined || data=="") {
@@ -312,10 +321,16 @@
 		        format: 'YYYY-MM-DD',
 		        locale: moment.locale('zh-cn')
 		    });
-		   
+		   	
+		    
 		    //$('#edit_endTime').val('2018-12-09');
 		});
-	
+		
+		//显示大图
+		function showBigImg(id,name,pic){
+			$("#showDialog h4").text(id + name );
+			$("#showDialog img").prop("src",pic);
+		}
 		
 		//打开编辑窗口
 		function editData(id) {
@@ -326,7 +341,7 @@
 				//新增
 				//新增窗口的标题
 				//新增的时候只需要填写必要字段
-				$("#myModalLabel").text("新增证书");
+				$("#myModalLabel").text("新增签名教师");
 				$(".igroreInput").hide();
 				$("#btnNewOrEdit").text("确定");
 				$("#edit_id").val("");
@@ -454,6 +469,11 @@
 					window.location.reload();
 				});
 			}
+		}
+		
+		
+		function refreshA(){
+			window.location = "http://localhost:8080/whit-bg/sign/list";
 		}
 	</script>
 </body>
