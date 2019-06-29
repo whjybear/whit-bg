@@ -30,8 +30,7 @@ Temporary Items
 ### Java template
 # Compiled class file
 *.class
-build/
-classes
+build/classes
 
 
 # Log file

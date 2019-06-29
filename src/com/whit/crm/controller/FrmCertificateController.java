@@ -8,11 +8,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.whit.common.utils.DownloadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whit.common.utils.Page;
@@ -291,6 +295,26 @@ public class FrmCertificateController {
 	public String lista3(QueryVo vo, Model model) {
 		System.out.println("a3");
 		return "a3";
+	}
+
+	@RequestMapping(value = "/frmCertificate/getExcelTemplate.action",method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Resource> getExcelTemplate(){
+		try{
+			return DownloadUtil.downloadResponse(frmCertificateService.exportFrmCertificateTemplate());
+		}catch (Exception e){
+
+		}
+		return null;
+	}
+
+	/**
+	 * 跳转到批量操作页面
+	 * @return jsp页面
+	 */
+	@RequestMapping(value = "/frmCertificate/batchAction")
+	public String batchAction(){
+		return "batchAction";
 	}
 
 }

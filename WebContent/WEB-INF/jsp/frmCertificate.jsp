@@ -375,6 +375,12 @@
 				                    <i class="fa fa-circle-o"></i>签名管理
 				                </a>
 				            </li>
+                            <li style="display: block;" id="admin-login">
+                                <%-- <a href="<%=basePath%>frmCertificate/seller_1" target="iframe"> --%>
+                                <a href="<%=basePath%>frmCertificate/batchAction" target="iframe">
+                                    <i class="fa fa-circle-o"></i>批量操作
+                                </a>
+                            </li>
 							<li style="display: none;" id="admin-login">
 				                <a href="<%=basePath%>frmCertificate/seller" target="iframe">
 				                    <i class="fa fa-circle-o"></i>商家管理

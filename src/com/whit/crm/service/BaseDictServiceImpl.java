@@ -16,6 +16,7 @@ public class BaseDictServiceImpl implements BaseDictService {
 	@Autowired
 	private BaseDictDao baseDictDao;
 
+	@Override
 	public List<BaseDict> selectBaseDictListByCode(String code) {
 		// TODO Auto-generated method stub
 		return baseDictDao.selectBaseDictListByCode(code);
