@@ -1,12 +1,17 @@
 package com.whit.crm.service;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import com.whit.common.utils.Page;
 import com.whit.crm.pojo.FrmCertificate;
+import com.whit.crm.pojo.FrmCertificateForExcel;
 import com.whit.crm.pojo.QueryVo;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public interface FrmCertificateService {
     /**
@@ -59,18 +64,19 @@ public interface FrmCertificateService {
 
 
     /**
-     * 根据excel文档批量导入证书
-     *
-     * @param file 要导入的excel文档
-     * @throws Exception ex
+     * 根据excel模板文件，导入到数据库
+     * @param fileName 文件名
+     * @param inputStream 文件输入流
+     * @return 返回一个证书的集合，用于回显到页面上
+     * @throws Exception 抛出异常
      */
-    void insertFrmCertificateByExcel(File file) throws Exception;
+    List<FrmCertificateForExcel> insertFrmCertificateByExcel(String fileName, InputStream inputStream) throws Exception;
 
     /**
      * 导出excel模版
-     *
-     * @return file
-     * @throws Exception ex
+     * @param frmCertificate 导出模版用的字段
+     * @param response response域用于写入文件
+     * @throws Exception 如果有异常则抛出
      */
-    File exportFrmCertificateTemplate() throws Exception;
+    void exportFrmCertificateTemplate(FrmCertificate frmCertificate,HttpServletResponse response) throws Exception;
 }

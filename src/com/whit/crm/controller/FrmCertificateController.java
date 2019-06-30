@@ -2,6 +2,7 @@ package com.whit.crm.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import com.whit.crm.pojo.QueryVo;
 import com.whit.crm.service.BaseDictService;
 import com.whit.crm.service.CustomerService;
 import com.whit.crm.service.FrmCertificateService;
+import org.springframework.web.context.ContextLoader;
 
 /**
  * 证书管理
@@ -297,15 +299,18 @@ public class FrmCertificateController {
 		return "a3";
 	}
 
+	/**
+	 * 获取excel模版
+	 */
 	@RequestMapping(value = "/frmCertificate/getExcelTemplate.action",method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Resource> getExcelTemplate(){
-		try{
-			return DownloadUtil.downloadResponse(frmCertificateService.exportFrmCertificateTemplate());
-		}catch (Exception e){
+	public void downLoadExcelTemplate(QueryVo vo,HttpServletResponse response){
 
+		try{
+			frmCertificateService.exportFrmCertificateTemplate( null,response);
+		}catch (Exception e){
+			// todo 异常处理
 		}
-		return null;
 	}
 
 	/**

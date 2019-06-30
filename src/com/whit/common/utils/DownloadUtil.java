@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 下载文件的工具包
@@ -33,12 +34,12 @@ public class DownloadUtil {
         HttpStatus status = HttpStatus.CREATED;
         try {
             if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
-                fileName = URLEncoder.encode(fileName, "UTF-8");
+                fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
                 // IE下载文件名空格变+号问题
                 fileName = fileName.replace("+", "%20");
                 status = HttpStatus.OK;
             } else {
-                fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1");
+                fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), "ISO8859-1");
             }
         } catch (UnsupportedEncodingException e) {
             throw new Exception("UnsupportedEncoding");

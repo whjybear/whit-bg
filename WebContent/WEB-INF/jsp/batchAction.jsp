@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="whit" uri="http://whit.cn/common/"%>
+<%@ taglib prefix="whit" uri="http://whit.cn/common/" %>
 <%
     String path = request.getContextPath();
 
@@ -40,13 +40,15 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-        #page-wrapper{
+        #page-wrapper {
             margin-left: 0px;
         }
-        .page-header{
-            margin-top:10px;
+
+        .page-header {
+            margin-top: 10px;
         }
-        td{
+
+        td {
             text-align: center;
         }
     </style>
@@ -56,55 +58,70 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" style="font-size:17px">证书管11111111理</h1>
+            <h1 class="page-header" style="font-size:17px">批量操作</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
-    <div class="panel panel-default" style="display: none">
+    <div class="panel panel-default">
         <div class="panel-body">
-            <form class="form-inline" action="${pageContext.request.contextPath }/frmCertificate/frm" method="post">
-                <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
-                    <label for="frmName">学员姓名</label> <input type="text" class="form-control" id="frmName" value="${name }"
-                                                             name="name">
+            <form class="form-inline" action="<%=basePath%>frmCertificate/getExcelTemplate.action" method="get">
+                <div>
+                    <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+                        <label for="teachersList">签名老师</label>
+                        <select class="form-control" id="teachersList" name="signTeacher">
+                            <option value="">--请选择--</option>
+                            <c:forEach items="${teachersList}" var="item">
+                                <option value="${item.dict_id}"
+                                        <c:if test="${item.dict_id == signTeacher}"> selected</c:if>>
+                                        ${item.dict_item_name}-${item.dict_id }
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+                        <label for="frmName">学员姓名</label>
+                        <input type="text"
+                               class="form-control"
+                               id="frmName"
+                               name="phone">
+                    </div>
+                    <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+                        <label for="frmTitle">证书编号</label>
+                        <input type="text"
+                               class="form-control"
+                               id="frmNumber"
+                               name="title">
+                    </div>
+                    <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+                        <label for="frmName">课程名称</label>
+                        <input type="text"
+                               class="form-control"
+                               id="frmTitle"
+                               name="number">
+                    </div>
+                    <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+                        <label for="frmName">课程结束日期</label>
+                        <input type="text"
+                               class="form-control"
+                               id="frmEndTime"
+                               name="number">
+                    </div>
+                    <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
+                        <label for="frmName">手机号码</label>
+                        <input type="text"
+                               class="form-control"
+                               id="frmPhone"
+                               name="number">
+                    </div>
                 </div>
-
-                <div class="form-group" style="display:none;margin-left: 15px;margin-bottom: 10px">
-                    <label for="isquery">证书状态</label>
-                    <select class="form-control" id="isquery" name="isquery">
-                        <option value="">--请选择--</option>
-                        <c:forEach items="${isQueryType}" var="item">
-                            <option value="${item.dict_id}"
-                                    <c:if test="${item.dict_id == isquery}"> selected</c:if>>${item.dict_item_name }</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
-                    <label for="frmName">手机号码</label> <input type="text"
-                                                             class="form-control" id="frmPhone" value="${phone }"
-                                                             name="phone">
-                </div>
-                <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
-                    <label for="frmTitle">课程名称</label> <input type="text" class="form-control" id="frmTitle" value="${title }"
-                                                              name="title">
-                </div>
-                <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
-                    <label for="frmName">证书编号</label> <input type="text"
-                                                             class="form-control" id="frmNumber" value="${number }"
-                                                             name="number">
-                </div>
-                <div class="form-group" style="margin-left: 15px;margin-bottom: 10px">
-                    <label for="teachersList">签名老师</label>
-                    <select class="form-control" id="teachersList" name="signTeacher">
-                        <option value="">--请选择--</option>
-                        <c:forEach items="${teachersList}" var="item">
-                            <option value="${item.dict_id}"
-                                    <c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name}-${item.dict_id }</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="margin-left: 15px;width:80px;margin-bottom: 10px">查  询</button>
-                <button data-toggle="modal" data-target="#editDialog" onclick="editData('new');return false;"  class="btn btn-primary" style="width:80px;margin-bottom: 10px">新  增</button>
+                <button type="submit" class="btn btn-primary" style="margin-left: 15px;width:80px;margin-bottom: 10px">
+                    下载模板
+                </button>
+                <button data-toggle="modal" data-target="#editDialog" onclick="editData('new');return false;"
+                        class="btn btn-primary" style="width:80px;margin-bottom: 10px">
+                    导入模板
+                </button>
             </form>
             <!-- <button data-toggle="modal" data-target="#editDialog" onclick="editData('new')"  class="btn btn-primary" style="float: right;margin-top:-33px">新  增</button> -->
         </div>
@@ -146,120 +163,27 @@
                                     <c:if test="${row.isquery == '10002'}"> 未查询</c:if>
                                 </td> --%>
                             <td>${row.queryTimes}</td>
-                            <td style="text-align: center;"><a href="#" class="btn btn-primary btn-xs"
-                                                               data-toggle="modal" data-target="#editDialog"
-                                                               onclick="editData(${row.id})">修改</a> <a href="#"
-                                                                                                       class="btn btn-danger btn-xs"
-                                                                                                       onclick="deleteData(${row.id})">删除</a></td>
+                            <td style="text-align: center;">
+                                <a href="#"
+                                   class="btn btn-primary btn-xs"
+                                   data-toggle="modal" data-target="#editDialog"
+                                   onclick="editData(${row.id})">修改</a>
+                                <a href="#"
+                                   class="btn btn-danger btn-xs"
+                                   onclick="deleteData(${row.id})">删除</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <div class="col-md-12 text-right">
-                    <whit:page
-                            url="${pageContext.request.contextPath }/frmCertificate/frm" />
+                    <whit:page url="${pageContext.request.contextPath }/frmCertificate/frm"/>
                 </div>
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
         </div>
         <!-- /.col-lg-12 -->
-    </div>
-</div>
-<!-- /#page-wrapper -->
-<!-- 新建、编辑对话框 -->
-<div class="modal fade" id="editDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">修改信息</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="edit_data_form" >
-                    <input type="hidden" id="edit_id" name="id"/>
-                    <div class="form-group">
-                        <label for="edit_title" class="col-sm-2 control-label">课程名称</label>
-                        <div class="col-sm-10">
-                            <input type="text" value="${sessionScope.tempTitle }" class="form-control" id="edit_title" placeholder="课程名称" name="title">
-                        </div>
-                    </div>
-                    <div class="form-group "  style="display: block;">
-                        <label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">签名老师</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="edit_signTeacher"  name="signTeacher">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${teachersList}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name }-${item.dict_id }</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group "  style="display: none;">
-                        <label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">查询状态</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="edit_isquery"  name="isquery">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${isQueryType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == isquery}"> selected</c:if>>${item.dict_item_name }</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_name" class="col-sm-2 control-label">姓名</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_name" placeholder="姓名" name="name">
-                        </div>
-                    </div>
-                    <div class="form-group " style="display: none;">
-                        <label for="edit_name" class="col-sm-2 control-label">证书类型</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly="readonly" class="form-control" id="edit_type" placeholder="证书类型" name="type">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_number" class="col-sm-2 control-label">证书编号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control"  id="edit_number" placeholder="证书编号" name="number">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_endTime" class="col-sm-2 control-label">结业日期</label>
-                        <div class='input-group date col-sm-10' id='datetimepicker1' style="width: 450px;padding-left:14px">
-                            <input   value="<%=session.getAttribute("tempEndTime") %>"
-                                     name="endTime" id="edit_endTime" type='text' class="form-control" />
-                            <span style="" class="input-group-addon">
-				                    <span class="glyphicon glyphicon-calendar"></span>
-				                </span>
-                        </div>
-                        <!-- <div class="col-sm-10">
-                            <input type="text" class="form-control"  id="edit_endTime" placeholder="结业日期" name="endTime">
-                        </div> -->
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_phone" class="col-sm-2 control-label">手机号码</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_phone" placeholder="手机号码" name="phone">
-                        </div>
-                    </div>
-
-                    <div class="form-group igroreInput">
-                        <label for="edit_queryTimes" class="col-sm-2 control-label">查询次数</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly="readonly" class="form-control" id="edit_queryTimes" placeholder="查询次数" name="queryTimes">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button id="btnNewOrEdit" type="button" class="btn btn-primary" onclick="updateData()">保存修改</button>
-            </div>
-        </div>
     </div>
 </div>
 <!-- /#wrapper -->
