@@ -14,9 +14,9 @@ import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+// import com.sun.image.codec.jpeg.JPEGCodec;
+// import com.sun.image.codec.jpeg.JPEGImageDecoder;
+// import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 
 
@@ -102,7 +102,7 @@ public class ImgUtil {
         //主图片的路径
         InputStream is = new FileInputStream(bigImgPath);
         //通过JPEG图象流创建JPEG数据流解码器
-        JPEGImageDecoder jpegDecoder = JPEGCodec.createJPEGDecoder(is);
+        // JPEGImageDecoder jpegDecoder = JPEGCodec.createJPEGDecoder(is);
         //解码当前JPEG数据流，返回BufferedImage对象
 //        BufferedImage buffImg = jpegDecoder.decodeAsBufferedImage();
         ImageIcon imgIcon = new ImageIcon(bigImgPath);
@@ -127,8 +127,8 @@ public class ImgUtil {
         g.dispose();
         OutputStream os = new FileOutputStream(outPathWithFileName);
         //创键编码器，用于编码内存中的图象数据。
-        JPEGImageEncoder en = JPEGCodec.createJPEGEncoder(os);
-        en.encode(buffImg);
+        // JPEGImageEncoder en = JPEGCodec.createJPEGEncoder(os);
+        // en.encode(buffImg);
         is.close();
         os.close();
     }

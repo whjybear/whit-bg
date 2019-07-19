@@ -2,17 +2,22 @@ package com.whit.crm.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.whit.common.utils.DownloadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whit.common.utils.Page;
@@ -23,6 +28,7 @@ import com.whit.crm.pojo.QueryVo;
 import com.whit.crm.service.BaseDictService;
 import com.whit.crm.service.CustomerService;
 import com.whit.crm.service.FrmCertificateService;
+import org.springframework.web.context.ContextLoader;
 
 /**
  * 证书管理
@@ -337,6 +343,29 @@ public class FrmCertificateController {
 	public String lista3(QueryVo vo, Model model) {
 		System.out.println("a3");
 		return "a3";
+	}
+
+	/**
+	 * 获取excel模版
+	 */
+	@RequestMapping(value = "/frmCertificate/getExcelTemplate.action",method = RequestMethod.GET)
+	@ResponseBody
+	public void downLoadExcelTemplate(QueryVo vo,HttpServletResponse response){
+
+		try{
+			frmCertificateService.exportFrmCertificateTemplate( null,response);
+		}catch (Exception e){
+			// todo 异常处理
+		}
+	}
+
+	/**
+	 * 跳转到批量操作页面
+	 * @return jsp页面
+	 */
+	@RequestMapping(value = "/frmCertificate/batchAction")
+	public String batchAction(){
+		return "batchAction";
 	}
 
 }

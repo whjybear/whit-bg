@@ -1,0 +1,57 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="whit-bg:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/whit_bg_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="whit-bg" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="aopalliance-1.0.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="asm-3.3.1.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="aspectjweaver-1.8.4.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="cglib-2.2.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-codec-1.6.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-collections-1.0.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-fileupload-1.2.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-io-1.3.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-lang3-3.1.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-lang3-3.4.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-logging-1.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="commons-pool2-2.0.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="dom4j-1.6.1.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="druid-1.0.9.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="hamcrest-core-1.3.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="jackson-annotations-2.4.0.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="jackson-core-2.4.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="jackson-databind-2.4.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="json-20131018.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="jstl-1.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="junit-4.12.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="log4j-1.2.17.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="mybatis-3.2.7.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="mybatis-spring-1.2.2.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="mysql-connector-java-8.0.16.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="slf4j-api-1.6.6.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="slf4j-log4j12-1.6.6.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-aop-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-aspects-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-beans-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-context-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-context-support-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-core-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-expression-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-jdbc-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-jms-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-messaging-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-test-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-tx-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-web-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="spring-webmvc-4.1.3.RELEASE.jar" module-name="whit-bg" />
+          <element id="library" level="module" name="standard-1.1.2.jar" module-name="whit-bg" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="whit-bg/web/Web" />
+    </root>
+  </artifact>
+</component>

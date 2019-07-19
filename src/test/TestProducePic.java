@@ -10,9 +10,9 @@ import java.util.Date;
 
 import javax.swing.ImageIcon;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+// import com.sun.image.codec.jpeg.JPEGCodec;
+// import com.sun.image.codec.jpeg.JPEGEncodeParam;
+// import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class TestProducePic {
 
@@ -68,10 +68,10 @@ public class TestProducePic {
 		g.dispose();
 		try {
 			FileOutputStream out = new FileOutputStream(outPath); // 先用一个特定的输出文件名
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bimage);
-			param.setQuality(100, true); //
-			encoder.encode(bimage, param);
+			// JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			// JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(bimage);
+			// param.setQuality(100, true); //
+			// encoder.encode(bimage, param);
 			out.close();
 		} catch (Exception e) {
 			return false;
