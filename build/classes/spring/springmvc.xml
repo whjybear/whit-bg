@@ -17,6 +17,15 @@
 	<!-- 配置注解驱动 -->
 	<mvc:annotation-driven />
 	
+	
+	<!-- 文件上传,id必须设置为multipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置文件上传大小 -->
+		<property name="maxUploadSize" value="5000000" />
+	</bean>
+	
+	
 	<!-- 默认首页 -->
 	 
 	
@@ -27,6 +36,8 @@
 
 	<mvc:resources location="/img/" mapping="/img/**" />
 	<mvc:resources location="/plugins/" mapping="/plugins/**" />
+	
+	<mvc:resources location="/queryapp/" mapping="/queryapp/**" />
 	<!-- 配置视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

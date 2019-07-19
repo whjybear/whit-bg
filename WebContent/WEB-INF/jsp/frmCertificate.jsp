@@ -317,7 +317,7 @@
                                         <a href="#" class="btn btn-default btn-flat">修改密码</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="/whit-bg" class="btn btn-default btn-flat">退出</a>
+                                        <a href="/frmCertificate/list" class="btn btn-default btn-flat">退出</a>
                                     </div>
                                 </li>
                             </ul>

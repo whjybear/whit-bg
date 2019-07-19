@@ -11,5 +11,8 @@
 <%=new Date().toLocaleString() %>
 
 <jsp:forward page="/frmCertificate/list"></jsp:forward>
+
+<%-- <jsp:forward page="/frmCertificate/toQuery"></jsp:forward> --%>
+
 </body>
 </html>

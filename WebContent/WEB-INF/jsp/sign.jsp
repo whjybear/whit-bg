@@ -146,10 +146,10 @@
 									<td>
 										<img style="width: 100px;" data-toggle="modal" onclick="showBigImg('${row.dict_id}','${row.dict_item_name}','/pic/${row.pic}')"  data-target="#showDialog"   alt="" src="/pic/${row.pic}">
 									</td>
-									<td style="text-align: center;"><a href="#" class="btn btn-primary btn-xs"
+									<td style="text-align: center;"><a style="width: 80px;" href="#" class="btn btn-primary btn-xs"
 										data-toggle="modal" data-target="#editDialog"
 										onclick="editData(${row.dict_id})">修改</a> <a href="#"
-										class="btn btn-danger btn-xs"
+										class="btn btn-danger btn-xs" style="display: none"
 										onclick="deleteData(${row.dict_id})">删除</a></td>
 								</tr>
 							</c:forEach>
@@ -198,85 +198,33 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">修改信息</h4>
 				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id="edit_data_form" >
-						<input type="hidden" id="edit_id" name="id"/>
+				<div class="modal-body" style="padding-bottom: 0px">
+					<form action="${pageContext.request.contextPath }/sign/updata.action" class="form-horizontal" id="edit_data_form" style="text-align: center;" enctype="multipart/form-data" method="post">
+						<input type="hidden" id="edit_id" name="baseDict.id"/>
 						<div class="form-group">
-							<label for="edit_title" class="col-sm-2 control-label">课程名称</label>
-							<div class="col-sm-10">
-								<input type="text" value="${sessionScope.tempTitle }" class="form-control" id="edit_title" placeholder="课程名称" name="title">
+							<label for="edit_title" class="col-sm-2 control-label">签名姓名</label>
+							<div class="col-sm-10" style="margin-bottom: 15px;">
+								<input type="text" value="${sessionScope.tempTitle }" class="form-control" id="edit_title" placeholder="签名姓名" name="signTeacher">
+							</div>
+							<label for="edit_title" class="col-sm-2 control-label">签名ID</label>
+							<div class="col-sm-10" style="margin-bottom: 15px;">
+								<input type="text" value="${sessionScope.tempTitle }" class="form-control" id="edit_ID" placeholder="签名姓名ID" name="dict_id">
+							</div>
+							<!-- <img alt="" style="margin: 5px;width:100px;height:100px;" src="file:///Users/bear/Downloads/jianhao.png"> --> 
+							<!-- 570/350 -->
+						</div>
+						<div class="form-group" style="margin-bottom: 5px;">
+							<label for="edit_title" class="col-sm-2 control-label">文件选择</label>
+							<div class="col-sm-10" style="margin-bottom: 15px;">
+								<input onchange="changeImg(this)" type="file" value="" name="pictureFile" class="form-control" id="edit_file" placeholder="签名文件" name="title">
 							</div>
 						</div>
-						<div class="form-group "  style="display: block;">
-							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">签名老师</label>
-							<div class="col-sm-10"> 
-								<select	class="form-control" id="edit_signTeacher"  name="signTeacher">
-									<option value="">--请选择--</option>
-									<c:forEach items="${teachersList}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == signTeacher}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<div class="form-group "  style="display: none;">
-							<label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">查询状态</label>
-							<div class="col-sm-10"> 
-								<select	class="form-control" id="edit_isquery"  name="isquery">
-									<option value="">--请选择--</option>
-									<c:forEach items="${isQueryType}" var="item">
-										<option value="${item.dict_id}"<c:if test="${item.dict_id == isquery}"> selected</c:if>>${item.dict_item_name }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_name" class="col-sm-2 control-label">姓名</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_name" placeholder="姓名" name="name">
-							</div>
-						</div>
-						<div class="form-group " style="display: none;">
-							<label for="edit_name" class="col-sm-2 control-label">证书类型</label>
-							<div class="col-sm-10">
-								<input type="text" readonly="readonly" class="form-control" id="edit_type" placeholder="证书类型" name="type">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_number" class="col-sm-2 control-label">证书编号</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control"  id="edit_number" placeholder="证书编号" name="number">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="edit_endTime" class="col-sm-2 control-label">结业日期</label>
-							<div class='input-group date col-sm-10' id='datetimepicker1' style="width: 450px;padding-left:14px">
-				                <input   value="<%=session.getAttribute("tempEndTime") %>"
-				                 name="endTime" id="edit_endTime" type='text' class="form-control" />
-				                <span style="" class="input-group-addon">
-				                    <span class="glyphicon glyphicon-calendar"></span>
-				                </span>
-				            </div>
-							<!-- <div class="col-sm-10">
-								<input type="text" class="form-control"  id="edit_endTime" placeholder="结业日期" name="endTime">
-							</div> -->
-						</div>
-						<div class="form-group">
-							<label for="edit_phone" class="col-sm-2 control-label">手机号码</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="edit_phone" placeholder="手机号码" name="phone">
-							</div>
-						</div>
-						
-						<div class="form-group igroreInput">
-							<label for="edit_queryTimes" class="col-sm-2 control-label">查询次数</label>
-							<div class="col-sm-10">
-								<input type="text" readonly="readonly" class="form-control" id="edit_queryTimes" placeholder="查询次数" name="queryTimes">
-							</div>
-						</div>
+						 
+						 
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" id="closeBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
 					<button id="btnNewOrEdit" type="button" class="btn btn-primary" onclick="updateData()">保存修改</button>
 				</div>
 			</div>
@@ -332,22 +280,28 @@
 			$("#showDialog img").prop("src",pic);
 		}
 		
+		//显示图片
+		function changeImg(it){
+			//alert($(it).val());
+			//alert($("#edit_data_form img").attr("src"));
+			//$("#edit_data_form img").prop("src",$(it).val());
+		}
+		var isEdit = false;
 		//打开编辑窗口
 		function editData(id) {
 			
 			if(id == 'new'){
 				//新增证书编号可输入
-				$("#edit_number").prop("readonly",false);
+				$("#edit_ID").prop("readonly",false);
 				//新增
 				//新增窗口的标题
 				//新增的时候只需要填写必要字段
-				$("#myModalLabel").text("新增签名教师");
+				$("#myModalLabel").text("新增签名证书");
 				$(".igroreInput").hide();
 				$("#btnNewOrEdit").text("确定");
-				$("#edit_id").val("");
-				$("#edit_name").val("");
-				$("#edit_number").val("");
-				$("#edit_phone").val("");
+				$("#edit_title").val("");
+				$("#edit_ID").val("");
+				$("#edit_file").val("");
 				
 				//$("#edit_endTime").val("");
 				//新增： 证书标题 和日 期需要记住上一次 todo
@@ -364,33 +318,74 @@
 				$("#myModalLabel").text("修改信息");
 				$(".igroreInput").show();
 				$("#btnNewOrEdit").text("保存修改");
+				//修改
+				isEdit = true;
 				//编辑
+				$("#edit_ID").val(id);
+				$("#edit_ID").prop("readonly",true);
 				$.ajax({
 					type:"get",
-					url:"<%=basePath%>frmCertificate/edit.action",
+					url:"<%=basePath%>sign/edit.action",
 					data:{"id":id},
 					success:function(data) {  
-						$("#edit_id").val(data.id);
-						$("#edit_name").val(data.name);
-						$("#edit_type").val(data.type)
-						$("#edit_number").val(data.number)
-						$("#edit_phone").val(data.phone)
-						$("#edit_isquery").val(data.isquery);
-						$("#edit_queryTimes").val(data.queryTimes);
-						
-						$("#edit_title").val(data.title);
-						$("#edit_signTeacher").val(data.signTeacher);
- 
-						$("#edit_endTime").val(formatDateTime(data.endTime,'YYYY-MM-DD'));
-						//证书编号不可修改
-						$("#edit_number").prop("readonly",true);
+						$("#edit_title").val(data.dict_item_name);
 					}
 				});
 			}
 			
 		}
-		//更新数据 + 新建
+		//直接表单提交
 		function updateData() {
+			if(isEdit == true){
+				//修改
+				alert("e..");
+				$("#closeBtn").click();
+				return;
+			}
+			//新增
+			//alert("直接表单提交");
+			if($("#edit_ID").val() == ""){
+				alert("签名ID不能为空");
+				return;
+			}
+			if($("#edit_title").val() == ""){
+				alert("签名老师姓名不能为空");
+				return;
+			}
+			if($("#edit_file").val() == ""){
+				alert("签名图片文件不能为空");
+				return;
+			}
+			//检查签名老师姓名+id是否有重复
+			var isDup = "";
+			$.ajax({
+					type:"get",
+					async:false,  //同步请求
+					url:"<%=basePath%>sign/checkNumber.action",
+					data:{
+						"edit_id":$("#edit_ID").val(),
+						"edit_title":$("#edit_title").val()
+					},
+					success:function(data) {
+						if(data == "nook"){
+							alert("签名证书ID重复！请检查");
+							isDup = data;
+							return;
+						}
+					}
+			})
+			if(isDup == "nook"){
+				return;
+			}
+			$("#edit_data_form").submit();
+			//$("#editDialog").hide();
+			$("#closeBtn").click();
+			//刷新本页面
+			
+		}
+		//更新数据 + 新建
+		function updateData2() {
+			alert("111");
 			//new FormData
 			if($("#edit_title").val() == ""){
 				alert("课程名称不能为空");
@@ -415,8 +410,9 @@
 			}
 			
 			if($("#edit_id").val() == ""){
+				alert("new..");
 				//检查$("#edit_number").val() 证书编号不能重复
-				var isDup = "";
+				<%-- var isDup = "";
 				$.ajax({
 						type:"get",
 						async:false,  //同步请求
@@ -434,11 +430,11 @@
 				})
 				if(isDup == "nook"){
 					return;
-				}
+				} --%>
 				//新建，只上传指定的字段
 				$.ajax({
-					type:"get",
-					url:"<%=basePath%>frmCertificate/update.action",
+					type:"post",
+					url:"<%=basePath%>sign/updata.action",
 					data:{
 						"name":$("#edit_name").val(),
 						"number":$("#edit_number").val(),
@@ -454,6 +450,7 @@
 					}
 				})
 			}else{
+				alert("222");
 				//编辑，自动序列化，没有后台类型转换的问题。todo
 				$.post("<%=basePath%>frmCertificate/update.action",$("#edit_data_form").serialize(),function(data){
 					alert("更新成功！");

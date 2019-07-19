@@ -2,6 +2,8 @@ package com.whit.crm.pojo;
 
 public class QueryVo {
 	
+	private BaseDict baseDict;
+	
 	//客户名称
 	private String custName;
 	private String custSource;
@@ -24,6 +26,14 @@ public class QueryVo {
 	String title; 	//课程名称
 	String signTeacher ; //签名老师
 	
+	String dict_id; //签名老师ID
+	
+	public String getDict_id() {
+		return dict_id;
+	}
+	public void setDict_id(String dict_id) {
+		this.dict_id = dict_id;
+	}
 	public Integer getStartRow() {
 		return startRow;
 	}
@@ -102,6 +112,12 @@ public class QueryVo {
 	}
 	public void setSignTeacher(String signTeacher) {
 		this.signTeacher = signTeacher;
+	}
+	public BaseDict getBaseDict() {
+		return baseDict;
+	}
+	public void setBaseDict(BaseDict baseDict) {
+		this.baseDict = baseDict;
 	}
 	
 	

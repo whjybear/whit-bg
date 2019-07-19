@@ -7,5 +7,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBaseDictListByCode" parameterType="String" resultType="BaseDict">
 		select * from base_dict where dict_type_code = #{value}
 	</select>
-
+	
+	
+	
+	<select id="selectSignIdAndTitle" parameterType="String" resultType="BaseDict">
+		select * from base_dict 
+		<where>
+			<if test="#{0} != null and #{0} != ''">
+				dict_id = #{0}
+			</if>
+			<!-- <if test="#{1} != null and #{1} != ''">
+				and dict_item_name = #{1}
+			</if> -->
+		</where>
+	</select>
+	
+	<!-- 新增 -->
+	<select id="insertBaseDictByNameAndPic" parameterType="BaseDict">
+		insert into base_dict(dict_id,dict_type_code,dict_type_name,dict_item_name,dict_enable,pic) values(#{dict_id},'011','签名老师姓名',#{dict_item_name},1,#{pic})
+	</select>
+	
+	<select id="selectBaseDictById" parameterType="Integer" resultType="BaseDict">
+		select * from base_dict where dict_id = #{value}
+	</select>
+	
 </mapper>

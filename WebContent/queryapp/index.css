@@ -1,0 +1,172 @@
+[data-loader='circle']
+{
+    width: 25px;
+    height: 25px;
+
+    -webkit-animation: circle infinite .75s linear;
+       -moz-animation: circle infinite .75s linear;
+         -o-animation: circle infinite .75s linear;
+            animation: circle infinite .75s linear;
+
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 100%;
+}
+@-webkit-keyframes circle
+{
+    0%
+    {
+        -webkit-transform: rotate(0);
+            -ms-transform: rotate(0);
+             -o-transform: rotate(0);
+                transform: rotate(0);
+    }
+    100%
+    {
+        -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+             -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}
+body {
+    padding: 0;
+    margin: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("./img/bkg.png") center no-repeat;
+    background-size: 100vw 100vh;
+}
+input {
+    outline: none;
+	border: none;
+}
+
+input::placeholder {
+    font-weight: 300;
+    color: #A1AAB1;
+}
+
+.content {
+	padding: 10px 14px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 26.3%;
+    width: 100%;
+}
+
+#form-box-up {
+    background: rgba(255, 255, 255, 0.9);
+    /* mask-image: url("img/form_up.svg");
+    -webkit-mask-image: url("img/form_up.svg"); */
+	border-radius: 10px;
+    width: 329px;
+    height: 208px;
+}
+
+#form-box-down {
+    background: rgba(255, 255, 255, 0.9);
+    /* mask-image: url("img/form_down.svg");
+    -webkit-mask-image: url("img/form_down.svg"); */
+	border-radius: 10px;
+    width: 329px;
+	padding-bottom: 10px;
+}
+
+.prompt-msg {
+    height: 28px;
+    background: #ff5602;
+    font-size: 12px;
+    line-height: 28px;
+    padding: 0 8px 0 8px;
+    word-break: keep-all;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+#input-box {
+    height: 104px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #EAECED;
+    border-radius: 6px;
+    color: #262626;
+}
+
+.cer-id-box {
+    border-bottom: 1px solid #EAECED;
+    height: 50%;
+    padding: 0 28px 0 28px;
+    display: flex;
+    flex-direction: row;
+	justify-content: space-between;
+    align-items: center;
+}
+
+.my-button {
+    width: 71px;
+    height: 20px;
+    background: #FF6101;
+    font-size: 12px;
+    color: white;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.cer-name-box {
+    padding: 0 28px 0 28px;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+	justify-content: space-between;
+    align-items: center;
+}
+.dialog-mask{
+    position: absolute;
+    left: 0;
+    top:0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+    background: rgba(0,0,0,0.6);
+}
+#dialog{
+    width: 329px;
+    background: white;
+    border-radius: 10px;
+    animation: zoom 0.2s;
+}
+#big-img{
+	animation: zoom 0.2s;
+}
+#error-msg{
+    margin-bottom: 26px;
+    word-break: break-all;
+    color: #262626;
+}
+@keyframes zoom{
+    0%{
+        transform: scale(0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
