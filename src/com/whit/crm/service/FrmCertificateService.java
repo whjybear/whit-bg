@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import com.whit.common.utils.Page;
+import com.whit.crm.pojo.BaseDict;
 import com.whit.crm.pojo.FrmCertificate;
 import com.whit.crm.pojo.FrmCertificateForExcel;
 import com.whit.crm.pojo.QueryVo;
@@ -79,4 +80,6 @@ public interface FrmCertificateService {
      * @throws Exception 如果有异常则抛出
      */
     void exportFrmCertificateTemplate(FrmCertificate frmCertificate,HttpServletResponse response) throws Exception;
+
+	List<FrmCertificate> selectFrmCertificateByNameAndTitleAndPhone(String name, String title, String phone);
 }

@@ -20,6 +20,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- //根据姓名、证书名称、手机号查询证书 -->
+	<select id="selectFrmCertificateByNameAndTitleAndPhone"  resultType="FrmCertificate">
+		select * from frmCertificate
+		<where>
+			<if test="#{0} != null and #{0} != ''">
+				name = #{0}
+			</if>
+			<if test="#{1} != null and #{1} != ''">
+				and title = #{1}
+			</if>
+			<if test="#{2} != null and #{2} != ''">
+				and phone = #{2}
+			</if>
+		</where>
+	</select>
+	
+	
+	
 	
 	<!-- //总条数 -->
 	<select id="frmCertificateCountByQueryVo" parameterType="QueryVo" resultType="Integer">
@@ -96,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and signTeacher = #{signTeacher}
 			</if>
 		</where>
-		order by id
+		order by id desc
 		limit #{startRow},#{size} 
 		
 	</select>

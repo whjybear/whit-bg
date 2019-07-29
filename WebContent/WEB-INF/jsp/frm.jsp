@@ -399,6 +399,7 @@
 				return;
 			}
 			
+			
 			if($("#edit_id").val() == ""){
 				//检查$("#edit_number").val() 证书编号不能重复
 				var isDup = "";
@@ -420,6 +421,29 @@
 				if(isDup == "nook"){
 					return;
 				}
+				//检查同一个人的同一个证书，不能重复
+				var isDup2 = "";
+				$.ajax({
+						type:"get",
+						async:false,  //同步请求
+						url:"<%=basePath%>frmCertificate/checkTitleAndNameAndPhone.action",
+						data:{
+							"title":$("#edit_title").val(), //课程名字
+							"name": $("#edit_name").val(),//姓名
+							"phone":$("#edit_phone").val()	//手机号码
+						},
+						success:function(data) {
+							if(data == "nook"){
+								alert("同一个人同一个证书重复！请检查");
+								isDup2 = data;
+								return;
+							}
+						}
+				})
+				if(isDup2 == "nook"){
+					return;
+				}
+				
 				//新建，只上传指定的字段
 				$.ajax({
 					type:"get",

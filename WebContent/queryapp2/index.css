@@ -1,13 +1,43 @@
+[data-loader='circle']
+{
+    width: 25px;
+    height: 25px;
+
+    -webkit-animation: circle infinite .75s linear;
+       -moz-animation: circle infinite .75s linear;
+         -o-animation: circle infinite .75s linear;
+            animation: circle infinite .75s linear;
+
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 100%;
+}
+@-webkit-keyframes circle
+{
+    0%
+    {
+        -webkit-transform: rotate(0);
+            -ms-transform: rotate(0);
+             -o-transform: rotate(0);
+                transform: rotate(0);
+    }
+    100%
+    {
+        -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+             -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}
 body {
     padding: 0;
     margin: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url("./img/bkg.png") center;
-    background-size: 100% 100%;
+    background: url("./img/bkg.png") center no-repeat;
+    background-size: 100vw 100vh;
 }
-
 input {
     outline: none;
 	border: none;
@@ -36,18 +66,20 @@ input::placeholder {
 
 #form-box-up {
     background: rgba(255, 255, 255, 0.9);
-    mask-image: url("img/form_up.svg");
-    -webkit-mask-image: url("img/form_up.svg");
+    /* mask-image: url("img/form_up.svg");
+    -webkit-mask-image: url("img/form_up.svg"); */
+	border-radius: 10px;
     width: 329px;
     height: 208px;
 }
 
 #form-box-down {
     background: rgba(255, 255, 255, 0.9);
-    mask-image: url("img/form_down.svg");
-    -webkit-mask-image: url("img/form_down.svg");
+    /* mask-image: url("img/form_down.svg");
+    -webkit-mask-image: url("img/form_down.svg"); */
+	border-radius: 10px;
     width: 329px;
-    height: 255px;
+	padding-bottom: 10px;
 }
 
 .prompt-msg {

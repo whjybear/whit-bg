@@ -1,4 +1,5 @@
 let dialog, cer_id, cer_name, form_box_down, error_msg, queryTimes, infoImg, imgBox, bigImg, isLoading = false;
+
 window.onload = function() {
 	// 一些变量的赋值
 	const btn_post = document.getElementById('button-post');

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.whit.common.utils.Page;
 import com.whit.crm.mapper.FrmCertificateDao;
+import com.whit.crm.pojo.BaseDict;
 import com.whit.crm.pojo.FrmCertificate;
 import com.whit.crm.pojo.QueryVo;
 import org.springframework.web.context.ContextLoader;
@@ -211,4 +212,10 @@ public class FrmCertificateServiceImpl implements FrmCertificateService {
         // todo 完善验证逻辑
         return true;
     }
+
+	@Override
+	public List<FrmCertificate> selectFrmCertificateByNameAndTitleAndPhone(String name, String title, String phone) {
+		
+		return frmCertificateDao.selectFrmCertificateByNameAndTitleAndPhone(name,title,phone);
+	}
 }
