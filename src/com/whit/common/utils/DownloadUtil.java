@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-
 /**
  * 下载文件的工具包
  * @author mano233

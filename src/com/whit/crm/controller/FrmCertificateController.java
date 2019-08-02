@@ -345,27 +345,4 @@ public class FrmCertificateController {
 		return "a3";
 	}
 
-	/**
-	 * 获取excel模版
-	 */
-	@RequestMapping(value = "/frmCertificate/getExcelTemplate.action",method = RequestMethod.GET)
-	@ResponseBody
-	public void downLoadExcelTemplate(QueryVo vo,HttpServletResponse response){
-
-		try{
-			frmCertificateService.exportFrmCertificateTemplate( null,response);
-		}catch (Exception e){
-			// todo 异常处理
-		}
-	}
-
-	/**
-	 * 跳转到批量操作页面
-	 * @return jsp页面
-	 */
-	@RequestMapping(value = "/frmCertificate/batchAction")
-	public String batchAction(){
-		return "batchAction";
-	}
-
 }
