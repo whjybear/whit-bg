@@ -1,33 +1,56 @@
-[data-loader='circle']
-{
+[data-loader='circle'] {
     width: 25px;
     height: 25px;
 
     -webkit-animation: circle infinite .75s linear;
-       -moz-animation: circle infinite .75s linear;
-         -o-animation: circle infinite .75s linear;
-            animation: circle infinite .75s linear;
+    -moz-animation: circle infinite .75s linear;
+    -o-animation: circle infinite .75s linear;
+    animation: circle infinite .75s linear;
 
     border: 2px solid #ffffff;
     border-top-color: transparent;
     border-radius: 100%;
 }
-@-webkit-keyframes circle
-{
-    0%
-    {
+
+@-webkit-keyframes circle {
+    0% {
         -webkit-transform: rotate(0);
-            -ms-transform: rotate(0);
-             -o-transform: rotate(0);
-                transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
     }
-    100%
-    {
+    100% {
         -webkit-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-             -o-transform: rotate(360deg);
-                transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
+}
+
+.zoom {
+    margin-bottom: 6px;
+}
+
+#query-times {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.lineTop {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border: 1px dashed rgba(0, 0, 0, 0.4);
+}
+.line{
+    width: 100%;
+    border: 1px dashed rgba(0, 0, 0, 0.4);
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.line:last-child{
+    display: none;
 }
 body {
     padding: 0;
@@ -35,12 +58,13 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url("./img/bkg.png") center no-repeat;
+    background: url("./img/bkg.png") center repeat;
     background-size: 100vw 100vh;
 }
+
 input {
     outline: none;
-	border: none;
+    border: none;
 }
 
 input::placeholder {
@@ -49,7 +73,7 @@ input::placeholder {
 }
 
 .content {
-	padding: 10px 14px 10px 14px;
+    padding: 10px 14px 10px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,7 +92,7 @@ input::placeholder {
     background: rgba(255, 255, 255, 0.9);
     /* mask-image: url("img/form_up.svg");
     -webkit-mask-image: url("img/form_up.svg"); */
-	border-radius: 10px;
+    border-radius: 10px;
     width: 329px;
     height: 208px;
 }
@@ -77,9 +101,9 @@ input::placeholder {
     background: rgba(255, 255, 255, 0.9);
     /* mask-image: url("img/form_down.svg");
     -webkit-mask-image: url("img/form_down.svg"); */
-	border-radius: 10px;
+    border-radius: 10px;
     width: 329px;
-	padding-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .prompt-msg {
@@ -111,7 +135,7 @@ input::placeholder {
     padding: 0 28px 0 28px;
     display: flex;
     flex-direction: row;
-	justify-content: space-between;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -131,13 +155,14 @@ input::placeholder {
     height: 50%;
     display: flex;
     flex-direction: row;
-	justify-content: space-between;
+    justify-content: space-between;
     align-items: center;
 }
-.dialog-mask{
+
+.dialog-mask {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -145,27 +170,31 @@ input::placeholder {
     justify-content: center;
     align-items: center;
     z-index: 9;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
 }
-#dialog{
+
+#dialog {
     width: 329px;
     background: white;
     border-radius: 10px;
     animation: zoom 0.2s;
 }
-#big-img{
-	animation: zoom 0.2s;
+
+#big-img {
+    animation: zoom 0.2s;
 }
-#error-msg{
+
+#error-msg {
     margin-bottom: 26px;
     word-break: break-all;
     color: #262626;
 }
-@keyframes zoom{
-    0%{
+
+@keyframes zoom {
+    0% {
         transform: scale(0);
     }
-    100%{
+    100% {
         transform: scale(1);
     }
 }

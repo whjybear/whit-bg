@@ -369,7 +369,7 @@
 				                    <i class="fa fa-circle-o"></i>证书管理
 				                </a>
 				            </li>
-				            <li style="display: block;" id="admin-login">
+				            <li style="display: none;" id="admin-login">
 				                <%-- <a href="<%=basePath%>frmCertificate/seller_1" target="iframe"> --%>
 				                <a href="<%=basePath%>sign/list" target="iframe">
 				                    <i class="fa fa-circle-o"></i>签名管理

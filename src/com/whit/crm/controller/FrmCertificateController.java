@@ -90,8 +90,8 @@ public class FrmCertificateController {
 	@RequestMapping(value = "/frmCertificate/checkLogin")
 	public void checkLogin(String username, String password, HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		// if("admin".equals(username) && "admin!@#$%admin".equals(password)) {
-		if ("admin".equals(username) && "1".equals(password)) {
+		if("admin".equals(username) && "admin!@#$%admin".equals(password)) {
+		//if ("admin".equals(username) && "1".equals(password)) {
 			req.getSession().setAttribute("loginUser", "loginUser");
 			resp.sendRedirect("listC");
 		} else {
@@ -287,7 +287,7 @@ public class FrmCertificateController {
 		return "a2";
 	}
 
-	// 去修改页面
+	// 检查证书编号重复
 	@RequestMapping(value = "/frmCertificate/checkNumber.action")
 	public @ResponseBody String checkNumber(String number) {
 		System.out.println("number......" + number);
@@ -298,8 +298,22 @@ public class FrmCertificateController {
 		} else {
 			return "ok";
 		}
-
 	}
+	//检查同一个人同一个证书是否重复（+手机号码）
+	@RequestMapping(value = "/frmCertificate/checkTitleAndNameAndPhone.action")
+	public @ResponseBody String checkTitleAndNameAndPhone(String name,String phone,String title) {
+		System.out.println("name......" + name);
+		System.out.println("phone......" + phone);
+		System.out.println("title......" + title);
+		// System.out.println(frmCertificateService.selectFrmCertificateByNumber(number));
+		if (frmCertificateService.selectFrmCertificateByNameAndTitleAndPhone(name,title,phone) != null
+				&& frmCertificateService.selectFrmCertificateByNameAndTitleAndPhone(name,title,phone).size() > 0) {
+			return "nook";
+		} else {
+			return "ok";
+		}
+	}
+	
 
 	// 去修改页面
 	@RequestMapping(value = "/frmCertificate/edit.action")

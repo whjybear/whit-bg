@@ -34,4 +34,7 @@ public interface FrmCertificateDao {
 		
 		//根据number查询证书
 		public List<FrmCertificate> selectFrmCertificateByNumber(String number);
+		
+		//根据姓名、证书名称、手机号查询证书
+		public List<FrmCertificate> selectFrmCertificateByNameAndTitleAndPhone(String name, String title, String phone);
 }
